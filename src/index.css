@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #0b1326;
+  --color-surface-dim: #0b1326;
+  --color-surface-bright: #31394d;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #bfc7d2;
+  --color-outline: #89929b;
+  --color-outline-variant: #3f4850;
+  --color-primary: #93ccff;
+  --color-primary-container: #3198dc;
+  --color-on-primary: #003351;
+  --color-on-primary-container: #002c47;
+  --color-secondary: #6bd8cb;
+  --color-secondary-container: #29a195;
+  --color-on-secondary: #003732;
+  --color-on-secondary-container: #00302b;
+  --color-tertiary: #ffb77d;
+  --color-tertiary-container: #d97707;
+  --color-on-tertiary: #4d2600;
+  --color-on-tertiary-container: #432100;
+  --color-tertiary-fixed: #ffdcc3;
+  --color-tertiary-fixed-dim: #ffb77d;
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+  --font-headline: 'Public Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-telemetry: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+  }
+}
+
+/* Tactical animation utilities */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+.animate-dash-flow {
+  animation: dashFlow 1.6s linear infinite;
+}
+
+/* Tactical Mission Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b1326;
+}
+::-webkit-scrollbar-thumb {
+  background: #222a3d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f4850;
+}
+
+/* =========================================================================
+   UNIVERSAL LIGHT MODE SYSTEM
+   When .dark class is removed, all containers, cards, borders, and text 
+   switch cleanly to luminous, high-contrast daylight mode without partial dark blocks!
+   ========================================================================= */
+
+html:not(.dark) body {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+/* Base backgrounds */
+html:not(.dark) .bg-\[\#060e20\] {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) .bg-\[\#0b1326\] {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) .bg-\[\#131b2e\] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05) !important;
+}
+
+html:not(.dark) .bg-\[\#171f33\] {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .bg-\[\#222a3d\] {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) .bg-\[\#2d3449\] {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Borders */
+html:not(.dark) .border-\[\#222a3d\],
+html:not(.dark) .border-\[\#171f33\],
+html:not(.dark) .border-\[\#3f4850\],
+html:not(.dark) .border-\[\#3f4850\]\/50 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Text colors */
+html:not(.dark) .text-\[\#dae2fd\] {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-\[\#bfc7d2\] {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-\[\#89929b\] {
+  color: #64748b !important;
+}
+
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
+/* Exception for buttons and badges with deliberate white text on dark/colored backgrounds */
+html:not(.dark) .bg-red-600 .text-white,
+html:not(.dark) .bg-red-700 .text-white,
+html:not(.dark) .bg-blue-600 .text-white,
+html:not(.dark) .bg-\[\#3198dc\] .text-white,
+html:not(.dark) .bg-\[\#93000a\] .text-white,
+html:not(.dark) button.bg-red-600,
+html:not(.dark) button.bg-blue-600,
+html:not(.dark) span.bg-red-600,
+html:not(.dark) .text-\[\#002c47\] {
+  color: #002c47 !important;
+}
+
+/* Inputs, selects, textareas in light mode */
+html:not(.dark) select,
+html:not(.dark) input,
+html:not(.dark) textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}

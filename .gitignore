@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production Build Outputs
+dist/
+dist-ssr/
+build/
+*.local
+
+# Test & Coverage Outputs
+coverage/
+.nyc_output/
+
+# Environment Variables & Secret Credentials (NEVER COMMIT)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*service-account*.json
+firebase-debug.log*
+firestore-debug.log*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime Data & Temporary Caches
+.cache/
+tmp/
+temp/
+.vite/
+.turbo/
+.eslintcache
+
+# IDE & Editor Files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

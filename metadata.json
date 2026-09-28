@@ -1,0 +1,6 @@
+{
+  "name": "CycloNerveAI",
+  "description": "Neuro-Symbolic Cyclone Cascade Intelligence and Anticipatory Action Platform. Predict the cascade. Protect the lifeline. Act before landfall.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
