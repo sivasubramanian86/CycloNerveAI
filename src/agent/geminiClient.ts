@@ -46,7 +46,7 @@ export class RealGeminiClient implements IGeminiClient {
       'gemini-3.7-flash';
     this.timeoutMs = options?.timeoutMs || 8000;
 
-    const key = options?.apiKey || process.env.GEMINI_API_KEY || '';
+    const key = options?.apiKey || process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || 'DEV_FALLBACK_UNCONFIGURED_KEY';
     this.ai = new GoogleGenAI({ apiKey: key });
   }
 

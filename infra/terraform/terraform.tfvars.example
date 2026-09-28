@@ -1,0 +1,5 @@
+# CycloNerveAI - Production Terraform Variables Example
+project_id      = "cyclonerve-ai-prod"
+region          = "asia-south1"
+environment     = "prod"
+container_image = "asia-south1-docker.pkg.dev/cyclonerve-ai-prod/cyclonerve/app:latest"

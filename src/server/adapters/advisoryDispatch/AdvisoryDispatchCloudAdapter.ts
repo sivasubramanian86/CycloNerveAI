@@ -17,6 +17,8 @@ import {
   buildUnavailableProvenance,
 } from '../../validation/provenanceValidator.ts';
 import { serverConfig } from '../../config/serverConfig.ts';
+import { liveWeatherService, BasinLiveTelemetry } from '../../services/liveWeatherService.ts';
+
 
 export class AdvisoryDispatchCloudAdapter implements IAdvisoryDispatchAdapter {
   private readonly cellBroadcastCenterUrl?: string;
@@ -139,5 +141,9 @@ export class AdvisoryDispatchCloudAdapter implements IAdvisoryDispatchAdapter {
       provenance: buildUnavailableProvenance('Advisory Dispatch Gateway', 'telemetry', 'Network offline'),
       channels: [],
     };
+  }
+
+  async fetchLiveBasinWeather(basinId: string): Promise<BasinLiveTelemetry> {
+    return liveWeatherService.getBasinTelemetry(basinId);
   }
 }

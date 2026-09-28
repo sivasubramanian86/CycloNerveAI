@@ -105,29 +105,38 @@ Prepositioning decisions are ranked under strict multi-dimensional constraints:
 - **ROI Multiplier:** $\text{ROI} = \frac{\text{Avoided Impact Value}}{\text{Intervention Cost}}$
 - **Constraint Boundaries:** Plans exceeding the allowable budget or the available pre-landfall time window ($\Delta t > T_{\text{landfall}}$) are flagged and disqualified from primary recommendation.
 
-### 3.4 AI Orchestration & Two-Tier Safety Verifier
-- **Model:** Google Gemini 3.7 Flash via `@google/genai`.
-- **Purpose:** Natural language explanations of risk arithmetic, translation across four Indian languages (English, Hindi, Telugu, Odia), and multimodal evidence fusion.
-- **Two-Tier Safety Verifier:**
-  - Layer 1: Prompt-injection filter intercepts instruction hijacking.
+### 3.4 AI Orchestration & Agentic Companion (Dual Engine)
+- **Primary Agentic Companion:** Google Gemini 2.5 Flash via `@google/genai` (`geminiCompanionService.ts`).
+  - Supports live structured function calling (`simulateLifelineCascade`, `getStormTelemetry`, `optimizeAnticipatoryAction`).
+  - Empathetic Dual-Mode Explanations:
+    - *Simple Story / Kid Mode:* Falling dominoes, rescue trucks, and flashlights for civil public comprehension.
+    - *Commander Mode:* Strict MWh loads, barometric deficits ($\Delta P$), and statutory breach notifications.
+- **Synthesis & Multimodal Intelligence:** Google Gemini 3.7 Flash via `@google/genai`.
+  - Natural language explanations of risk arithmetic, translation across 10 Indian/international languages, and multimodal satellite SAR evidence fusion.
+- **Two-Tier Safety Verifier & Model Armor:**
+  - Layer 1: Vertex AI Model Armor semantic boundaries intercepting prompt leakage, role escapes (`act as an unfiltered terminal`), and unauthorized dispatch attempts.
   - Layer 2: Post-generation factual grounder verifies all output claims against the deterministic asset state. Prohibits speculative death tolls, phantom casualties, or unverified district references.
   - Layer 3: Enforces a strict **one retry maximum**. If the model fails verification twice or the API times out, the system automatically falls back to verified deterministic statutory templates.
   - Layer 4: **Global AI Kill Switch** instantly disables all generative features across the entire system.
 
-### 3.5 Replaceable Server-Side Adapter Architecture
-To ensure extreme resilience, the platform never communicates directly with cloud SDKs from the browser. All integrations pass through the **Server-Side Adapter Registry**:
+### 3.5 Replaceable Server-Side Adapter Architecture & Cloud Security
+To ensure extreme resilience and authenticity, the platform never communicates directly with cloud SDKs from the browser. All integrations pass through the **Server-Side Adapter Registry** backed by official Google Cloud SDKs:
 
 | Adapter Interface | Mock Implementation (Offline Edge) | Live Cloud Implementation |
 | :--- | :--- | :--- |
-| `IEarthEngineAdapter` | Sentinel-1 SAR synthetic radar inundation raster | Google Earth Engine REST API |
-| `IBigQueryAdapter` | Spatial assets & demographic density tables | Google Cloud BigQuery API |
-| `IFirebaseAuthAdapter` | In-memory FIPS-140-3 / FIDO2 dual-key escrow | Firebase Admin Auth SDK |
-| `IFirestoreAdapter` | In-memory document store & provenance logs | Google Cloud Firestore |
-| `ICloudStorageAdapter`| Synthetic signed URLs & local raster artifacts | Google Cloud Storage (GCS) |
-| `IGoogleMapsAdapter` | A* coastal elevation & evacuation routing | Google Maps Routes & Geocoding API |
-| `IAdvisoryDispatchAdapter`| Common Alerting Protocol (CAP v1.2 XML) emulator | Cell Broadcast Center & Siren gateways |
+| `IEarthEngineAdapter` | Sentinel-1 SAR synthetic radar inundation raster | Google Earth Engine REST API (ADC OAuth2 token exchange) |
+| `IBigQueryAdapter` | Spatial assets & demographic density tables | `@google-cloud/bigquery` (Parameterized `ST_DWithin` spatial SQL) |
+| `IFirebaseAuthAdapter` | In-memory FIPS-140-3 / FIDO2 dual-key escrow | Firebase Admin Auth SDK / Identity Toolkit |
+| `IFirestoreAdapter` | In-memory document store & provenance logs | `@google-cloud/firestore` (Create-only WORM immutability) |
+| `ICloudStorageAdapter`| Synthetic signed URLs & local raster artifacts | `@google-cloud/storage` (V4 Signed URLs & bucket metadata) |
+| `IGoogleMapsAdapter` | A* coastal elevation & evacuation routing | Google Maps Routes & Geocoding REST APIs |
+| `IAdvisoryDispatchAdapter`| Common Alerting Protocol (CAP v1.2 XML) emulator | Cell Broadcast Center & Open-Meteo live marine telemetry |
 
-### 3.6 Resilience Tiers & Dynamic Degradation
+### 3.6 Cloud Armor WAF & Firestore Rules Enforcement
+- **Google Cloud Armor:** Pre-configured OWASP Top 10 rules, IP rate limiting (100 req/min), and geographical request filtering (`infra/terraform/cloud_armor.tf`).
+- **Cloud Firestore Security Rules:** Root `firestore.rules` enforces create-only immutability for `/audit_worm_ledger/`, dual-officer 2FA verification for dispatches, and public read for advisories.
+
+### 3.7 Resilience Tiers & Dynamic Degradation
 The system continuously evaluates adapter health to compute its active operational resilience tier:
 1. `TIER_0_CLOUD_EDGE`: All cloud services healthy and connected.
 2. `TIER_1_HYBRID_DEGRADED`: Transient cloud latencies or partial API downtime; local cache engaged.

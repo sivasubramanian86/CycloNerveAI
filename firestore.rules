@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // -------------------------------------------------------------
+    // Security Helper Functions
+    // -------------------------------------------------------------
+    function isAuthenticated() {
+      return request.auth != null && request.auth.uid != null;
+    }
+
+    function hasRole(role) {
+      return isAuthenticated() && request.auth.token.role == role;
+    }
+
+    function isIncidentCommander() {
+      return hasRole('Incident Commander') || hasRole('Administrator');
+    }
+
+    function isAuthorizedDualOfficer() {
+      return isAuthenticated() && 
+        (hasRole('Incident Commander') || hasRole('Administrator') || hasRole('Field Officer') || hasRole('Analyst')) &&
+        request.resource.data.keys().hasAll(['firstOfficer', 'secondOfficer', 'actionDigest', 'merkleRoot', 'authorizedAt']) &&
+        request.resource.data.firstOfficer.tokenKeyId != request.resource.data.secondOfficer.tokenKeyId;
+    }
+
+    // -------------------------------------------------------------
+    // 1. Incidents Collection (/incidents/{basinId})
+    // Real-time basin telemetry and cyclone storm status.
+    // -------------------------------------------------------------
+    match /incidents/{basinId} {
+      // Civil protection teams, public dashboards, and authenticated officers can read
+      allow read: if true;
+      // Only authenticated Incident Commanders or automated sensor pipelines can update telemetry
+      allow create, update: if isAuthenticated() && (isIncidentCommander() || hasRole('Field Officer'));
+      allow delete: if false; // Deletion forbidden during active emergency
+    }
+
+    // -------------------------------------------------------------
+    // 2. Dispatch Authorizations (/dispatch_authorizations/{authId})
+    // 2FA quorum officer signatures and cryptographic Merkle roots.
+    // -------------------------------------------------------------
+    match /dispatch_authorizations/{authId} {
+      // Readable by authenticated personnel and auditors
+      allow read: if isAuthenticated();
+      // Strictly requires Dual-Officer 2FA quorum credentials
+      allow create: if isAuthorizedDualOfficer();
+      // Quorum authorizations are tamper-sealed: no update or deletion
+      allow update, delete: if false;
+    }
+
+    // -------------------------------------------------------------
+    // 3. WORM Audit Ledger (/audit_worm_ledger/{entryId})
+    // Cryptographic Write-Once-Read-Many tamper-evident audit receipts.
+    // -------------------------------------------------------------
+    match /audit_worm_ledger/{entryId} {
+      // Readable by authenticated compliance auditors and Incident Commanders
+      allow read: if isAuthenticated() && (isIncidentCommander() || hasRole('Analyst'));
+      // Create-only: entries may be appended but NEVER updated or deleted
+      allow create: if isAuthenticated() && 
+        request.resource.data.keys().hasAll(['traceId', 'timestamp', 'agentName', 'validationResult', 'merkleHash']) &&
+        request.resource.data.traceId == entryId;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // -------------------------------------------------------------
+    // 4. Public Advisories (/public_advisories/{advisoryId})
+    // Multilingual civil protection warnings.
+    // -------------------------------------------------------------
+    match /public_advisories/{advisoryId} {
+      // Publicly readable so civil defense apps, SMS aggregators, and civilians can fetch alerts
+      allow read: if true;
+      // Writes strictly forbidden to public; only approved dual-officer dispatch can publish
+      allow create, update: if isAuthenticated() && isIncidentCommander();
+      allow delete: if false;
+    }
+
+    // -------------------------------------------------------------
+    // Default Deny Rule
+    // Any unspecified collection or path is strictly blocked
+    // -------------------------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

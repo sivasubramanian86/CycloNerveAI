@@ -69,3 +69,24 @@ CycloNerveAI enforces strict role isolation across emergency operations personne
 ### 7. Global AI Kill Switch & Degraded Mode
 - Immediate runtime circuit breaker disabling all Generative AI endpoints.
 - In Kill Switch or Degraded Mode, the system defaults deterministically to verified statutory templates without calling remote models.
+
+### 8. Google Cloud Armor Layer 7 WAF & Edge Defense
+- Configured in `infra/terraform/cloud_armor.tf` with Cloud Run Serverless NEG bindings.
+- IP rate-limiting policy (100 req/min per IP with 10-minute ban period).
+- Managed pre-configured OWASP Top 10 protection rules:
+  - SQL Injection: `sqli-v33-stable`
+  - Cross-Site Scripting: `xss-v33-stable`
+  - Local/Remote File Inclusion: `lfi-v33-stable`, `rfi-v33-stable`
+  - Remote Code Execution: `rce-v33-stable`
+- Geographic restriction targeting sovereign disaster operational jurisdictions.
+
+### 9. Google Cloud Firestore Least-Privilege Rules
+- Enforced at database engine layer via root `firestore.rules`.
+- Dispatches require authenticated Dual-Officer signatures (`request.resource.data.dualOfficerApproval == true`).
+- WORM audit log collection (`/audit_worm_ledger/{entryId}`) strictly enforces `create`-only immutability; `update` and `delete` are denied at the database rule level.
+- Public emergency advisories are readable without authentication; writes are restricted strictly to authorized Emergency Operations Center admins.
+
+### 10. Vertex AI Model Armor Semantic Security Boundaries
+- Layered semantic inspection before token ingestion into Gemini 2.5 Flash / 3.7 Flash pipelines.
+- Deep pattern analysis catches prompt leakage, role escapes (`act as an unfiltered terminal`), and unauthorized dispatch commands (`DISPATCH_FORCE_NOW`).
+- All intercepted injection attempts are automatically cataloged in the SHA-256 Merkle WORM audit ledger with threat taxonomy and forensic timestamps.

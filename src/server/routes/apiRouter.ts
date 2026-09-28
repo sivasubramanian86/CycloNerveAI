@@ -28,6 +28,8 @@ import { approvalGatekeeper } from '../security/approvalGate.ts';
 import { systemControls } from '../security/systemControls.ts';
 import { auditLogService } from '../security/auditLogService.ts';
 import { validateUploadedBuffer } from '../security/uploadValidation.ts';
+import { liveWeatherService } from '../services/liveWeatherService.ts';
+import { geminiCompanionService } from '../services/geminiCompanionService.ts';
 
 export const apiRouter = Router();
 
@@ -815,3 +817,55 @@ apiRouter.get('/maps/geocode', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Geocoding failed', message: errMsg });
   }
 });
+
+// -------------------------------------------------------------
+// 13. Live Meteorological Feeds (Open-Meteo & Marine API)
+// -------------------------------------------------------------
+
+apiRouter.get('/weather/basins', (_req: Request, res: Response) => {
+  res.json({
+    basins: liveWeatherService.getSupportedBasins(),
+  });
+});
+
+apiRouter.get('/weather/live/:basinId', async (req: Request, res: Response) => {
+  try {
+    const basinId = req.params.basinId;
+    const forceRefresh = req.query.refresh === 'true';
+    const telemetry = await liveWeatherService.getBasinTelemetry(basinId, forceRefresh);
+    res.json(telemetry);
+  } catch (err: unknown) {
+    const errMsg = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: 'Failed to retrieve live basin telemetry', message: errMsg });
+  }
+});
+
+// -------------------------------------------------------------
+// 14. Server-Side Gemini 2.5 Flash Companion Pipeline
+// -------------------------------------------------------------
+
+apiRouter.post('/ai/companion', async (req: Request, res: Response) => {
+  try {
+    const { query, basinId, mode } = req.body || {};
+
+    if (!query || typeof query !== 'string' || query.trim().length === 0) {
+      res.status(400).json({
+        error: 'Query parameter is mandatory and must be a non-empty string.',
+        code: 'VALIDATION_ERROR',
+      });
+      return;
+    }
+
+    const response = await geminiCompanionService.answerQuery({
+      query: query.trim(),
+      basinId,
+      mode,
+    });
+
+    res.json(response);
+  } catch (err: unknown) {
+    const errMsg = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: 'AI Companion inference failed', message: errMsg });
+  }
+});
+

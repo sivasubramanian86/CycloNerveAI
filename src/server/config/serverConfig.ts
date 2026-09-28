@@ -33,6 +33,8 @@ export interface ServerEnvironmentConfig {
   };
   firestore: AdapterConfig & {
     databaseId: string;
+    clientEmail?: string;
+    privateKey?: string;
   };
   cloudStorage: AdapterConfig & {
     bucketName: string;
@@ -78,7 +80,8 @@ export function loadServerConfig(): ServerEnvironmentConfig {
       hasPrivateKey: Boolean(process.env.EARTH_ENGINE_PRIVATE_KEY || process.env.GOOGLE_APPLICATION_CREDENTIALS),
       hasCredentials: Boolean(
         (process.env.EARTH_ENGINE_SERVICE_ACCOUNT && process.env.EARTH_ENGINE_PRIVATE_KEY) ||
-        process.env.GOOGLE_APPLICATION_CREDENTIALS
+        process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+        process.env.K_SERVICE
       ),
     },
 
@@ -86,7 +89,12 @@ export function loadServerConfig(): ServerEnvironmentConfig {
       mode: resolveMode(process.env.BIGQUERY_MODE, globalMode, useMocksDefault),
       projectId: process.env.BIGQUERY_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT,
       dataset: process.env.BIGQUERY_DATASET || 'cyclonerve_spatial_odisha',
-      hasCredentials: Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS || process.env.BIGQUERY_PROJECT_ID),
+      hasCredentials: Boolean(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+        process.env.BIGQUERY_PROJECT_ID ||
+        process.env.K_SERVICE ||
+        process.env.GOOGLE_CLOUD_PROJECT
+      ),
     },
 
     firebaseAuth: {
@@ -100,14 +108,26 @@ export function loadServerConfig(): ServerEnvironmentConfig {
       mode: resolveMode(process.env.FIRESTORE_MODE, globalMode, useMocksDefault),
       projectId: process.env.FIREBASE_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT,
       databaseId: process.env.FIRESTORE_DATABASE_ID || '(default)',
-      hasCredentials: Boolean(process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
+      hasCredentials: Boolean(
+        (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY) ||
+        process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+        process.env.K_SERVICE ||
+        process.env.GOOGLE_CLOUD_PROJECT
+      ),
     },
 
     cloudStorage: {
       mode: resolveMode(process.env.CLOUD_STORAGE_MODE, globalMode, useMocksDefault),
       projectId: process.env.GCS_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT,
       bucketName: process.env.GCS_BUCKET_NAME || 'cyclonerve-disaster-assets',
-      hasCredentials: Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS || process.env.GCS_BUCKET_NAME),
+      hasCredentials: Boolean(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+        process.env.GCS_BUCKET_NAME ||
+        process.env.K_SERVICE ||
+        process.env.GOOGLE_CLOUD_PROJECT
+      ),
     },
 
     googleMaps: {

@@ -164,9 +164,13 @@ export default function App() {
           />
 
           {/* Primary Mission Viewport */}
-          <main className={`flex-1 md:ml-64 overflow-y-auto p-4 lg:p-6 transition-colors ${
-            isDark ? 'bg-[#0b1326]' : 'bg-slate-50'
-          }`}>
+          <main
+            role="main"
+            aria-label="EOC Mission Viewport"
+            className={`flex-1 md:ml-64 overflow-y-auto p-4 lg:p-6 transition-colors ${
+              isDark ? 'bg-[#0b1326]' : 'bg-slate-50'
+            }`}
+          >
             {currentRoute === 'situation-overview' && (
               <SituationOverview
                 onNavigate={(route) => setCurrentRoute(route)}
