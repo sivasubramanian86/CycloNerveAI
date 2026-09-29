@@ -34,32 +34,57 @@ export function calculateGeminiCost(
  * Production implementation using @google/genai
  */
 export class RealGeminiClient implements IGeminiClient {
-  private readonly ai: GoogleGenAI;
+  private readonly ai: GoogleGenAI | null = null;
   private readonly modelName: string;
   private readonly timeoutMs: number;
 
   constructor(options?: { modelName?: string; apiKey?: string; timeoutMs?: number }) {
     this.modelName =
       options?.modelName ||
-      process.env.GEMINI_MODEL ||
-      process.env.VITE_GEMINI_MODEL ||
+      (typeof process !== 'undefined' ? process.env?.GEMINI_MODEL || process.env?.VITE_GEMINI_MODEL : undefined) ||
       'gemini-3.7-flash';
     this.timeoutMs = options?.timeoutMs || 8000;
 
-    const key = options?.apiKey || process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
-    const projectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.BIGQUERY_PROJECT_ID || 'genai-apac-2026-491004';
-    const location = process.env.GOOGLE_CLOUD_LOCATION || 'us-central1';
+    const key = options?.apiKey || (typeof process !== 'undefined' ? process.env?.GEMINI_API_KEY || process.env?.VITE_GEMINI_API_KEY : undefined);
+    const projectId = (typeof process !== 'undefined' ? process.env?.GOOGLE_CLOUD_PROJECT || process.env?.BIGQUERY_PROJECT_ID : undefined) || 'genai-apac-2026-491004';
+    const location = (typeof process !== 'undefined' ? process.env?.GOOGLE_CLOUD_LOCATION : undefined) || 'us-central1';
 
-    if (key && key !== 'DEV_FALLBACK_UNCONFIGURED_KEY') {
-      this.ai = new GoogleGenAI({ apiKey: key, vertexai: false });
+    const isBrowser = typeof window !== 'undefined';
+
+    if (isBrowser) {
+      // Browser runtime cannot use ADC without API Key
+      if (key && key !== 'DEV_FALLBACK_UNCONFIGURED_KEY') {
+        try {
+          this.ai = new GoogleGenAI({ apiKey: key });
+        } catch {
+          this.ai = null;
+        }
+      } else {
+        // Do not instantiate GoogleGenAI with vertexai: true in browser
+        // Frontend delegates to server-side companion route /api/ai/companion
+        this.ai = null;
+      }
     } else {
-      this.ai = new GoogleGenAI({ vertexai: true, project: projectId, location });
+      if (key && key !== 'DEV_FALLBACK_UNCONFIGURED_KEY') {
+        this.ai = new GoogleGenAI({ apiKey: key, vertexai: false });
+      } else {
+        try {
+          this.ai = new GoogleGenAI({ vertexai: true, project: projectId, location });
+        } catch {
+          this.ai = null;
+        }
+      }
     }
   }
 
   public async generateStructured<T>(
     request: GeminiStructuredRequest<T>
   ): Promise<GeminiStructuredResponse<T>> {
+    if (!this.ai) {
+      // Clean deterministic fallback if running in browser without API key
+      return new MockGeminiClient().generateStructured(request);
+    }
+
     const startTime = Date.now();
     const traceId = `TRC-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 

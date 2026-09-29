@@ -20,6 +20,7 @@ import { RiskScoringEngine } from './risk/RiskScoringEngine.ts';
 import { InfrastructureGraphEngine } from './graph/InfrastructureGraphEngine.ts';
 import { InterventionEngine } from './intervention/InterventionEngine.ts';
 import { CycloneCommander } from '../agent/CycloneCommander.ts';
+import { MockGeminiClient } from '../agent/geminiClient.ts';
 
 interface DomainContainer {
   infraRepo: IInfrastructureRepository;
@@ -49,7 +50,7 @@ const defaultContainer: DomainContainer = {
     defaultEdgeRepo,
     defaultInterventionRepo
   ),
-  commander: new CycloneCommander(),
+  commander: new CycloneCommander({ client: new MockGeminiClient() }),
 };
 
 const DomainContext = createContext<DomainContainer>(defaultContainer);

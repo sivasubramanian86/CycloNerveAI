@@ -21,7 +21,7 @@ import {
   RiskExplanationOutput,
 } from './types.ts';
 import { SafetyVerifier } from './safetyVerifier.ts';
-import { RealGeminiClient } from './geminiClient.ts';
+import { RealGeminiClient, MockGeminiClient } from './geminiClient.ts';
 
 export class CycloneCommander {
   private readonly client: IGeminiClient;
@@ -37,8 +37,7 @@ export class CycloneCommander {
     this.config = {
       modelName:
         options?.config?.modelName ||
-        process.env.GEMINI_MODEL ||
-        process.env.VITE_GEMINI_MODEL ||
+        (typeof process !== 'undefined' ? process.env?.GEMINI_MODEL || process.env?.VITE_GEMINI_MODEL : undefined) ||
         'gemini-3.7-flash',
       timeoutMs: options?.config?.timeoutMs || 8000,
       maxVerifierRetries: 1, // Enforced requirement: 1 retry maximum
@@ -46,7 +45,11 @@ export class CycloneCommander {
       temperature: options?.config?.temperature ?? 0.2,
     };
 
-    this.client = options?.client || new RealGeminiClient({ modelName: this.config.modelName });
+    const isBrowser = typeof window !== 'undefined';
+    const defaultClient = isBrowser
+      ? new MockGeminiClient()
+      : new RealGeminiClient({ modelName: this.config.modelName });
+    this.client = options?.client || defaultClient;
     this.safetyVerifier = options?.safetyVerifier || new SafetyVerifier();
   }
 

@@ -28,21 +28,22 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-# Statutory Security: Run as non-root user
-USER node
-
 # Copy package manifests and production dependencies
-COPY --chown=node:node package.json ./
+COPY package.json package-lock.json* ./
 RUN npm install --omit=dev --ignore-scripts
 
 # Copy built frontend client assets from builder
-COPY --chown=node:node --from=builder /app/dist ./dist
+COPY --from=builder /app/dist ./dist
 
 # Copy server, shared, and domain runtime source
-COPY --chown=node:node server.ts ./
-COPY --chown=node:node src ./src
-COPY --chown=node:node tsconfig.json ./
-COPY --chown=node:node metadata.json ./
+COPY server.ts ./
+COPY src ./src
+COPY tsconfig.json ./
+COPY metadata.json ./
+
+# Statutory Security: Grant ownership to node user and switch
+RUN chown -R node:node /app
+USER node
 
 # Environment defaults (Cloud Run injects PORT and credentials via Secret Manager)
 ENV NODE_ENV=production \
