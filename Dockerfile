@@ -33,7 +33,7 @@ USER node
 
 # Copy package manifests and production dependencies
 COPY --chown=node:node package.json ./
-RUN npm install --omit=dev --ignore-scripts && npm install tsx --no-save
+RUN npm install --omit=dev --ignore-scripts
 
 # Copy built frontend client assets from builder
 COPY --chown=node:node --from=builder /app/dist ./dist
@@ -47,7 +47,6 @@ COPY --chown=node:node metadata.json ./
 # Environment defaults (Cloud Run injects PORT and credentials via Secret Manager)
 ENV NODE_ENV=production \
     PORT=3000 \
-    NODE_OPTIONS="--import tsx" \
     ADAPTER_MODE="mock" \
     USE_MOCK_ADAPTERS="true"
 
@@ -59,4 +58,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD wget -qO- http://localhost:${PORT:-3000}/api/health || exit 1
 
 # Launch hardened server
-CMD ["node", "server.ts"]
+CMD ["npm", "start"]

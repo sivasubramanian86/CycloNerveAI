@@ -7,7 +7,7 @@
  */
 
 import type { DataClassification } from '../../shared/types/index.ts';
-import { ProvenanceRecord, ProvenanceStatus } from '../adapters/types.ts';
+import type { ProvenanceRecord, ProvenanceStatus } from '../adapters/types.ts';
 
 export interface FreshnessPolicy {
   maxStalenessSeconds: number;

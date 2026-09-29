@@ -8,7 +8,7 @@
  */
 
 import { GoogleAuth } from 'google-auth-library';
-import {
+import type {
   ElevationResponse,
   HealthCheckResult,
   IEarthEngineAdapter,

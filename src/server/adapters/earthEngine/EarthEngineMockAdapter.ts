@@ -4,7 +4,7 @@
  * for local development and offline resilience drills.
  */
 
-import {
+import type {
   ElevationPoint,
   ElevationResponse,
   HealthCheckResult,
