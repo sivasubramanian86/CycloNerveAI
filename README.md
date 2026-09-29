@@ -1,6 +1,6 @@
 # CycloNerveAI: National Cascade Intelligence & Anticipatory Action Platform
 
-[![CI Pipeline](https://github.com/organization/cyclonerve-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/organization/cyclonerve-ai/actions)
+[![CI Pipeline](https://github.com/sivasubramanian86/CycloNerveAI/actions/workflows/ci.yml/badge.svg)](https://github.com/sivasubramanian86/CycloNerveAI/actions)
 [![Node.js Version](https://img.shields.io/badge/node.js-v22.x-blue.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](./LICENSE)
 [![Cloud Run](https://img.shields.io/badge/deployment-Google%20Cloud%20Run-blue.svg)](https://cloud.google.com/run)
@@ -76,8 +76,8 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/organization/cyclonerve-ai.git
-cd cyclonerve-ai
+git clone https://github.com/sivasubramanian86/CycloNerveAI.git
+cd CycloNerveAI
 
 # 2. Install dependencies
 npm install

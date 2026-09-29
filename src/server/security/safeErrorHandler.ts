@@ -6,6 +6,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { safeLogger } from './redaction.ts';
 import { auditLogService } from './auditLogService.ts';
+import { serverConfig } from '../config/serverConfig.ts';
 
 export interface ApiErrorResponse {
   error: string;
@@ -50,7 +51,7 @@ export function safeErrorHandler() {
         statusCode,
         code: errorCode,
       },
-      isSimulated: true,
+      isSimulated: serverConfig.globalAdapterMode === 'mock',
     });
 
     res.status(statusCode).json({
