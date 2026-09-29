@@ -46,8 +46,15 @@ export class RealGeminiClient implements IGeminiClient {
       'gemini-3.7-flash';
     this.timeoutMs = options?.timeoutMs || 8000;
 
-    const key = options?.apiKey || process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || 'DEV_FALLBACK_UNCONFIGURED_KEY';
-    this.ai = new GoogleGenAI({ apiKey: key });
+    const key = options?.apiKey || process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+    const projectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.BIGQUERY_PROJECT_ID || 'genai-apac-2026-491004';
+    const location = process.env.GOOGLE_CLOUD_LOCATION || 'us-central1';
+
+    if (key && key !== 'DEV_FALLBACK_UNCONFIGURED_KEY') {
+      this.ai = new GoogleGenAI({ apiKey: key, vertexai: false });
+    } else {
+      this.ai = new GoogleGenAI({ vertexai: true, project: projectId, location });
+    }
   }
 
   public async generateStructured<T>(

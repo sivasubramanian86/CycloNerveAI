@@ -152,9 +152,9 @@ export class BigQueryCloudAdapter implements IBigQueryAdapter {
     const startTime = Date.now();
     try {
       const query = `
-        SELECT asset_id, name, sector, ST_Y(geo_point) as lat, ST_X(geo_point) as lng, elevation_m, floodwall_m
-        FROM \`${this.projectId}.${this.dataset}.assets\`
-        WHERE ST_DWithin(geo_point, ST_GeogPoint(@lng, @lat), @radiusMeters)
+        SELECT asset_id, name, sector, ST_Y(location) as lat, ST_X(location) as lng, elevation_m, floodwall_m
+        FROM \`${this.projectId || 'genai-apac-2026-491004'}.${this.dataset}.coastal_infrastructure_assets\`
+        WHERE ST_DWithin(location, ST_GeogPoint(@lng, @lat), @radiusMeters)
       `;
 
       const options = {

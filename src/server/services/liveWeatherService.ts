@@ -13,7 +13,7 @@
  * - DEGRADED_SATCOM_OFFLINE: Calibrated benchmark fallback when uplink is severed
  */
 
-import { GLOBAL_CYCLONE_REGIONS, GlobalCycloneRegion } from '../../data/globalCycloneRegions.ts';
+import { GLOBAL_CYCLONE_REGIONS, type GlobalCycloneRegion } from '../../data/globalCycloneRegions.ts';
 
 export interface BasinLiveTelemetry {
   basinId: string;
