@@ -23,6 +23,14 @@ Predicted Peak Storm Surge:  3.6 meters MSL (Astronomical Spring Tide Phase)
 
 ---
 
+## Operational Workflow & User Journey
+
+![Incident Commander User Flow](./assets/user_flow_diagram.svg)
+
+![Multi-Persona User Journey](./assets/user_journey_diagram.svg)
+
+---
+
 ## Critical Lifeline Infrastructure Under Threat
 
 ### 1. Dhamra 220/132kV Primary Substation (`ASSET-SUB-DHAMRA-01`)

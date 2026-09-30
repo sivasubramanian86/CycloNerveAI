@@ -14,70 +14,19 @@
 
 ## 2. High-Level System Architecture (C4 Container View)
 
-```
-+---------------------------------------------------------------------------------------------------------------+
-|                                                CLIENT LAYER                                                   |
-|                                                                                                               |
-|  +---------------------------------------------------------------------------------------------------------+  |
-|  |   Vite + React 19 Single Page Application (Tailwind CSS, Lucide Icons, Motion)                          |  |
-|  |   - Interactive Geospatial Situation Map (Canvas / SVG Overlays)                                        |  |
-|  |   - Interactive Directed Acyclic Graph (DAG) Cascade Visualizer                                         |  |
-|  |   - Counterfactual Intervention Optimizer & ROI Ranking Dashboard                                       |  |
-|  |   - Multilingual Advisory Drafting Station (English, Hindi, Telugu, Odia)                               |  |
-|  |   - Statutory Incident Commander Evidence Review & Dual-Officer 2FA Modal                               |  |
-|  +----------------------------------------------------+----------------------------------------------------+  |
-+-------------------------------------------------------|-------------------------------------------------------+
-                                                        | HTTPS REST API (Strictly Server-Side Proxied)
-                                                        v
-+---------------------------------------------------------------------------------------------------------------+
-|                                        EXPRESS APPLICATION SERVER (Node.js 22 LTS)                            |
-|                                                                                                               |
-|  +---------------------------------------------------------------------------------------------------------+  |
-|  |   Security Ingress Middleware                                                                           |  |
-|  |   - Defensive Security Headers (CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy)                  |  |
-|  |   - Sliding-Window Rate Limiters (Global: 120/min, Dispatch: 10/min, Auth: 25/min, Upload: 20/min)      |  |
-|  |   - Request Sanitizer & Prompt-Injection Guardrails                                                     |  |
-|  |   - Safe Error Handling & Sensitive Log Redaction                                                       |  |
-|  +----------------------------------------------------+----------------------------------------------------+  |
-|                                                       |                                                       |
-|                                                       v                                                       |
-|  +---------------------------------------------------------------------------------------------------------+  |
-|  |   Domain & Symbolic Core                                                                                |  |
-|  |   - Deterministic Composite Risk Engine: Risk = H * E * V * C                                           |  |
-|  |   - Infrastructure Graph DAG: Cycle Detection, Topological Sort, Diamond De-duplication                |  |
-|  |   - Multi-Step Failure Cascade Propagation Engine                                                       |  |
-|  |   - Counterfactual Intervention Optimizer (Net Benefit & ROI Multipliers)                               |  |
-|  |   - Human-in-the-Loop Statutory Approval Gatekeeper                                                     |  |
-|  |   - Write-Once-Read-Many (WORM) Cryptographic Audit Log (SHA-256 Merkle Chain)                         |  |
-|  +----------------------------------------------------+----------------------------------------------------+  |
-|                                                       |                                                       |
-|                                                       v                                                       |
-|  +---------------------------------------------------------------------------------------------------------+  |
-|  |   Server-Side Adapter Registry & Fallback Architecture                                                  |  |
-|  |   - Dynamic Health Aggregator & Resilience Tier Evaluator                                               |  |
-|  |   - 7 Modular Adapter Pairs: (Mock / Air-Gapped vs Live Google Cloud API)                               |  |
-|  |     1. EarthEngineAdapter (Copernicus Sentinel-1 SAR Flood Rasters)                                     |  |
-|  |     2. BigQueryAdapter (Geospatial Asset Buffers & Census Population)                                   |  |
-|  |     3. FirebaseAuthAdapter (FIPS-140-3 / FIDO2 Dual-Officer Credentials)                                |  |
-|  |     4. FirestoreAdapter (State Persistence & Audit Records)                                             |  |
-|  |     5. CloudStorageAdapter (Signed URLs & GeoTIFF Imagery Storage)                                      |  |
-|  |     6. GoogleMapsAdapter (Evacuation Routes & Isochrone Navigation)                                     |  |
-|  |     7. AdvisoryDispatchAdapter (CAP v1.2 XML, Cell Broadcast, Siren Networks)                           |  |
-|  +----------------------------------------------------+----------------------------------------------------+  |
-+-------------------------------------------------------|-------------------------------------------------------+
-                                                        |
-                                                        v
-+---------------------------------------------------------------------------------------------------------------+
-|                                            EXTERNAL CLOUD PLATFORM                                            |
-|                                                                                                               |
-|   +------------------------------------+   +------------------------------------+   +---------------------+   |
-|   |   Google Gemini 3.7 Flash API      |   |   Google Cloud Services            |   | Public Dissemination|   |
-|   |   - Multimodal Evidence Fusion     |   |   - Earth Engine, BigQuery         |   | - CAP XML Gateways  |   |
-|   |   - Multilingual Synthesis         |   |   - Cloud Storage, Firestore       |   | - Cell Broadcast    |   |
-|   |   - Natural Language Explanations  |   |   - Google Maps Platform           |   | - Municipal Sirens  |   |
-|   +------------------------------------+   +------------------------------------+   +---------------------+   |
-+---------------------------------------------------------------------------------------------------------------+
-```
+![CycloNerveAI Enterprise Architecture](./docs/assets/architecture_diagram.svg)
+
+---
+
+## 2.1 Mission-Critical Incident Commander User Flow
+
+![Incident Commander User Flow](./docs/assets/user_flow_diagram.svg)
+
+---
+
+## 2.2 Multi-Persona User Journey
+
+![Multi-Persona User Journey](./docs/assets/user_journey_diagram.svg)
 
 ---
 

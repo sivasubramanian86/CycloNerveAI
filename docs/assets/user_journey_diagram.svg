@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="journeyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080e1a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Persona Card Gradients -->
+    <linearGradient id="pCommander" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#091322" />
+    </linearGradient>
+    <linearGradient id="pField" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#06221c" />
+    </linearGradient>
+    <linearGradient id="pFamily" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#1f1530" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .j-title { font-family: 'Inter', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #ffffff; }
+    .j-subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 600; fill: #38bdf8; letter-spacing: 1px; }
+    .persona-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; }
+    .persona-name { font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 700; fill: #f8fafc; }
+    .stage-title { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; fill: #cbd5e1; }
+    .stage-desc { font-family: 'Inter', system-ui, sans-serif; font-size: 10px; font-weight: 400; fill: #94a3b8; }
+    .stat-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; }
+  </style>
+
+  <rect width="1200" height="480" fill="url(#journeyBg)" />
+
+  <!-- Header -->
+  <g transform="translate(50, 40)">
+    <text x="0" y="0" class="j-title">Multi-Persona User Journey &amp; Operational Experience</text>
+    <text x="0" y="20" class="j-subtitle">HOW DIFFERENT STAKEHOLDERS INTERACT WITH CYCLONERVE-AI BEFORE AND DURING LANDFALL</text>
+  </g>
+
+  <!-- JOURNEY 1: DISTRICT INCIDENT COMMANDER -->
+  <g transform="translate(50, 85)">
+    <rect width="1100" height="105" rx="8" fill="url(#pCommander)" stroke="#0284c7" stroke-width="1.5" />
+    
+    <!-- Persona Tag -->
+    <g transform="translate(20, 20)">
+      <circle cx="20" cy="20" r="18" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1" />
+      <text x="20" y="25" text-anchor="middle" font-size="16">🛡️</text>
+      <text x="48" y="16" class="persona-name">District Collector / Incident Commander</text>
+      <text x="48" y="32" class="persona-badge" fill="#38bdf8">ROLE: STATUTORY AUTHORITY (DISASTER ACT §34)</text>
+    </g>
+
+    <!-- Stage 1 -->
+    <g transform="translate(340, 18)">
+      <rect width="220" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#38bdf8">1. Situational Ingest</text>
+      <text x="12" y="36" class="stage-desc">Views 15 Basins &amp; Cat-4 Alert</text>
+      <text x="12" y="52" class="stage-desc">Notes +0.80m surge overtopping</text>
+    </g>
+
+    <!-- Stage 2 -->
+    <g transform="translate(580, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#fbbf24">2. Intervention Optimization</text>
+      <text x="12" y="36" class="stage-desc">Evaluates Plan Alpha 4.22x ROI</text>
+      <text x="12" y="52" class="stage-desc">Verifies T-3h 45m safe road window</text>
+    </g>
+
+    <!-- Stage 3 -->
+    <g transform="translate(840, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#0284c7" />
+      <text x="12" y="20" class="stage-title" fill="#4ade80">3. Dual-Officer Quorum 2FA</text>
+      <text x="12" y="36" class="stage-desc">Signs with FIPS FIDO2 Security Key</text>
+      <text x="12" y="52" class="stage-desc">Seals WORM Merkle audit ledger</text>
+    </g>
+  </g>
+
+  <!-- JOURNEY 2: GROUND FIELD ENGINEER / SATELLITE ANALYST -->
+  <g transform="translate(50, 205)">
+    <rect width="1100" height="105" rx="8" fill="url(#pField)" stroke="#059669" stroke-width="1.5" />
+    
+    <!-- Persona Tag -->
+    <g transform="translate(20, 20)">
+      <circle cx="20" cy="20" r="18" fill="#047857" fill-opacity="0.3" stroke="#34d399" stroke-width="1" />
+      <text x="20" y="25" text-anchor="middle" font-size="16">👷</text>
+      <text x="48" y="16" class="persona-name">Field Operations Lead &amp; Sensor Specialist</text>
+      <text x="48" y="32" class="persona-badge" fill="#34d399">ROLE: TACTICAL DEPLOYMENT (FIELD OFFICER)</text>
+    </g>
+
+    <!-- Stage 1 -->
+    <g transform="translate(340, 18)">
+      <rect width="220" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#34d399">1. Sensor &amp; SAR Verification</text>
+      <text x="12" y="36" class="stage-desc">Audits Sentinel-1 radar backscatter</text>
+      <text x="12" y="52" class="stage-desc">Validates floodwall threshold live</text>
+    </g>
+
+    <!-- Stage 2 -->
+    <g transform="translate(580, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#fbbf24">2. Asset Pre-Positioning</text>
+      <text x="12" y="36" class="stage-desc">Dispatches 4 dewatering pump sets</text>
+      <text x="12" y="52" class="stage-desc">Routes 500kVA generator via Road R-16</text>
+    </g>
+
+    <!-- Stage 3 -->
+    <g transform="translate(840, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#059669" />
+      <text x="12" y="20" class="stage-title" fill="#4ade80">3. Co-Authorizing Quorum</text>
+      <text x="12" y="36" class="stage-desc">Enters Officer B 2FA credentials</text>
+      <text x="12" y="52" class="stage-desc">Confirms ground staging complete</text>
+    </g>
+  </g>
+
+  <!-- JOURNEY 3: CITIZEN, EVACUEE & FAMILY -->
+  <g transform="translate(50, 325)">
+    <rect width="1100" height="105" rx="8" fill="url(#pFamily)" stroke="#9333ea" stroke-width="1.5" />
+    
+    <!-- Persona Tag -->
+    <g transform="translate(20, 20)">
+      <circle cx="20" cy="20" r="18" fill="#7e22ce" fill-opacity="0.3" stroke="#c084fc" stroke-width="1" />
+      <text x="20" y="25" text-anchor="middle" font-size="16">🧒</text>
+      <text x="48" y="16" class="persona-name">Coastal Citizen, Family &amp; Evacuee</text>
+      <text x="48" y="32" class="persona-badge" fill="#c084fc">ROLE: PUBLIC RECIPIENT (VIEWER / AFFECTED POPULATION)</text>
+    </g>
+
+    <!-- Stage 1 -->
+    <g transform="translate(340, 18)">
+      <rect width="220" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#c084fc">1. Plain-English Storm Story</text>
+      <text x="12" y="36" class="stage-desc">Reads 5 Ws &amp; How in simple words</text>
+      <text x="12" y="52" class="stage-desc">Toggles "Kid Mode" (Dominoes)</text>
+    </g>
+
+    <!-- Stage 2 -->
+    <g transform="translate(580, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#1e293b" />
+      <text x="12" y="20" class="stage-title" fill="#fbbf24">2. Safe Evacuation Navigation</text>
+      <text x="12" y="36" class="stage-desc">Follows Google Maps safe routes</text>
+      <text x="12" y="52" class="stage-desc">Avoids submerged coastal lowlands</text>
+    </g>
+
+    <!-- Stage 3 -->
+    <g transform="translate(840, 18)">
+      <rect width="240" height="68" rx="5" fill="#0f172a" stroke="#9333ea" />
+      <text x="12" y="20" class="stage-title" fill="#4ade80">3. Multilingual Sirens &amp; Alerts</text>
+      <text x="12" y="36" class="stage-desc">Receives Cell Broadcast in Odia / Hindi</text>
+      <text x="12" y="52" class="stage-desc">Reaches cyclone shelter safely</text>
+    </g>
+  </g>
+
+  <!-- Footer Insight -->
+  <g transform="translate(50, 445)">
+    <text x="0" y="15" font-family="'Inter', sans-serif" font-size="11" fill="#64748b">
+      CycloNerveAI balances statutory mathematical rigor for disaster commanders with clear, compassionate, and low-cognitive-load guidance for frontline workers and families.
+    </text>
+  </g>
+</svg>

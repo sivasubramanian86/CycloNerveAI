@@ -14,39 +14,19 @@
 
 ## 🏛️ Core System Architecture & Pillars
 
-```
-+---------------------------------------------------------------------------------------------------------------+
-|                                            CYCLONERVE-AI PLATFORM                                             |
-+---------------------------------------------------------------------------------------------------------------+
-|                                                                                                               |
-|  [SYMBOLIC DETERMINISTIC CORE]                           [NEURAL MULTIMODAL INTELLIGENCE]                     |
-|  * Composite Risk Arithmetic: Risk = H * E * V * C       * Google Gemini 3.7 Flash Foundation Model           |
-|  * Infrastructure Graph DAG: Cycle Detection Engine      * Multimodal Evidence Fusion (SAR Radar + Telemetry) |
-|  * Multi-Step Failure Cascade Propagation                * Plain-Language Factor Explanations for Commanders |
-|  * Counterfactual Intervention Optimizer & ROI Ranking   * Multilingual Drafting: English, Hindi, Telugu, Odia|
-|                                                                                                               |
-+---------------------------------------+---------------------------------------+-------------------------------+
-                                        |                                       |
-                                        v                                       v
-+---------------------------------------------------------------------------------------------------------------+
-|                                   STATUTORY DEFENSE-IN-DEPTH SECURITY LAYER                                   |
-|  * Role-Based Access Control (RBAC): Viewer, Analyst, Field Officer, Incident Commander, Administrator        |
-|  * Statutory Approval Gatekeeper: No unapproved draft can bypass the dissemination gate                       |
-|  * Dual-Officer Cryptographic 2FA: Mandatory dual-key authorization (FIPS-140-3 / FIDO2)                     |
-|  * Two-Tier Safety Verifier: Zero speculative casualty claims, 1-retry maximum with deterministic fallback   |
-|  * Global AI Kill Switch & Degraded Mode Circuit Breakers                                                     |
-|  * Cryptographic WORM Audit Trail: Immutable append-only event chain with SHA-256 Merkle leaf verification   |
-|  * Upload Defense: Binary magic-byte MIME validation for satellite SAR rasters and field photos               |
-+---------------------------------------------------------------------------------------------------------------+
-                                        |
-                                        v
-+---------------------------------------------------------------------------------------------------------------+
-|                                SERVER-SIDE REPLACEABLE ADAPTER ARCHITECTURE                                   |
-|  * 7 Pluggable Adapter Pairs: Earth Engine, BigQuery, Firebase Auth, Firestore, Storage, Maps, Dispatch       |
-|  * Dynamic Resilience Tier Evaluation: TIER_0_CLOUD_EDGE down to TIER_3_AIRGAPPED_EDGE (100% offline edge)    |
-|  * Strict Simulation Labeling: All synthetic demonstration records visibly stamped with `isSimulated: true`  |
-+---------------------------------------------------------------------------------------------------------------+
-```
+![CycloNerveAI Enterprise Architecture](./docs/assets/architecture_diagram.svg)
+
+---
+
+## 🔄 Mission-Critical Incident Commander User Flow
+
+![Incident Commander User Flow](./docs/assets/user_flow_diagram.svg)
+
+---
+
+## 👥 Multi-Persona User Journey
+
+![Multi-Persona User Journey](./docs/assets/user_journey_diagram.svg)
 
 ---
 
