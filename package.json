@@ -11,8 +11,8 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "type-check": "tsc --noEmit",
-    "test": "tsx --test test/domain.test.ts test/agent.test.ts test/adapters.test.ts test/phase5-security.test.ts test/cloud-scaling.test.ts test/personal-intelligence.test.ts",
-    "test:unit": "tsx --test test/domain.test.ts test/agent.test.ts test/personal-intelligence.test.ts",
+    "test": "tsx --test test/domain.test.ts test/agent.test.ts test/adapters.test.ts test/phase5-security.test.ts test/cloud-scaling.test.ts test/personal-intelligence.test.ts test/community-lifeline.test.ts",
+    "test:unit": "tsx --test test/domain.test.ts test/agent.test.ts test/personal-intelligence.test.ts test/community-lifeline.test.ts",
     "test:integration": "tsx --test test/adapters.test.ts test/phase5-security.test.ts test/cloud-scaling.test.ts"
   },
   "dependencies": {

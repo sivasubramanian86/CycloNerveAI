@@ -135,6 +135,7 @@ export default function App() {
           onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           onOpenWalkthrough={() => setIsWalkthroughOpen(true)}
           onOpenPitchDesk={() => setIsPitchDeskOpen(true)}
+          onOpenCitizenPortal={() => setCurrentRoute('mobile-field')}
         />
 
         {/* Degraded Air-Gap Alert Banner (When terrestrial lines severed) */}

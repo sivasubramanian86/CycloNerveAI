@@ -3,6 +3,7 @@ import { InfrastructureAsset } from '../../shared/types/index.ts';
 import { ProvenanceBadge } from '../../components/ProvenanceBadge.tsx';
 import { SCENARIO_ASSETS, SCENARIO_EDGES } from '../../data/coastalScenarioData.ts';
 import { useDomain } from '../../domain/index.ts';
+import { communityService } from '../community/communityService.ts';
 
 interface InfrastructureMeshProps {
   onSelectForCascade?: (assetId: string) => void;
@@ -14,6 +15,8 @@ export const InfrastructureMesh: React.FC<InfrastructureMeshProps> = ({ onSelect
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeAsset, setActiveAsset] = useState<InfrastructureAsset | null>(SCENARIO_ASSETS[0]);
+  const [showCommunityReports, setShowCommunityReports] = useState<boolean>(true);
+  const communityReports = communityService.getReports();
 
   // Filter assets
   const filteredAssets = SCENARIO_ASSETS.filter((asset) => {
@@ -94,19 +97,73 @@ export const InfrastructureMesh: React.FC<InfrastructureMeshProps> = ({ onSelect
           </p>
         </div>
 
-        {/* Total Assets Summary Pill */}
-        <div className="flex items-center gap-2 bg-[#060e20] px-3.5 py-2 rounded-xl border border-[#222a3d] font-mono text-xs">
-          <div>
-            <span className="text-[#89929b] block text-[10px]">Total Nodes</span>
-            <span className="font-bold text-white text-base">{SCENARIO_ASSETS.length} Assets</span>
-          </div>
-          <span className="text-[#3f4850] mx-1">|</span>
-          <div>
-            <span className="text-[#89929b] block text-[10px]">Dependency Edges</span>
-            <span className="font-bold text-[#6bd8cb] text-base">{SCENARIO_EDGES.length} Links</span>
+        {/* Total Assets Summary & Community Ground-Truth Pill */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={() => setShowCommunityReports(!showCommunityReports)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-xl border font-mono text-xs cursor-pointer transition-all ${
+              showCommunityReports
+                ? 'bg-[#0d261e] border-emerald-500/50 text-emerald-300 shadow-md shadow-emerald-950/40'
+                : 'bg-[#060e20] border-[#222a3d] text-[#89929b] hover:text-white'
+            }`}
+            title="Toggle Citizen Ground-Truth Crowd Reports Feed"
+          >
+            <span className="material-symbols-outlined text-base text-emerald-400">diversity_1</span>
+            <div className="text-left">
+              <span className="block text-[9px] uppercase font-bold text-emerald-400">Crowd Ground-Truth</span>
+              <span className="font-bold text-white text-xs">{communityReports.length} Citizen Reports</span>
+            </div>
+          </button>
+
+          <div className="flex items-center gap-2 bg-[#060e20] px-3.5 py-2 rounded-xl border border-[#222a3d] font-mono text-xs">
+            <div>
+              <span className="text-[#89929b] block text-[10px]">Total Nodes</span>
+              <span className="font-bold text-white text-base">{SCENARIO_ASSETS.length} Assets</span>
+            </div>
+            <span className="text-[#3f4850] mx-1">|</span>
+            <div>
+              <span className="text-[#89929b] block text-[10px]">Dependency Edges</span>
+              <span className="font-bold text-[#6bd8cb] text-base">{SCENARIO_EDGES.length} Links</span>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Community Ground-Truth Crowd Alert Banner */}
+      {showCommunityReports && (
+        <div className="bg-[#0b1f17] border border-emerald-500/40 p-4 rounded-xl space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-emerald-300 flex items-center gap-1.5 font-mono uppercase">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Grassroots Ground-Truth Feed (Jan-Raksha Crowd Ingestion)
+            </span>
+            <span className="text-[11px] font-mono text-[#89929b]">
+              Gemini 2.5 Flash Verified • Bidirectional Loop
+            </span>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-2 pt-1">
+            {communityReports.map((r) => (
+              <div
+                key={r.reportId}
+                className="bg-[#06140f] border border-emerald-500/20 p-2.5 rounded-lg text-xs space-y-1"
+              >
+                <div className="flex items-center justify-between font-mono text-[10px]">
+                  <span className="text-emerald-400 font-bold">{r.villageName}</span>
+                  <span className="text-amber-400 font-bold">SEV {r.severity}/5</span>
+                </div>
+                <p className="text-[11px] text-white line-clamp-2">
+                  {r.description}
+                </p>
+                <div className="text-[10px] text-emerald-300/80 font-mono flex items-center justify-between pt-1 border-t border-emerald-500/10">
+                  <span>{r.reporterRole}</span>
+                  <span className="text-emerald-400">✓ AI Verified</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Filter Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-[#131b2e] border border-[#222a3d] p-3 rounded-xl">

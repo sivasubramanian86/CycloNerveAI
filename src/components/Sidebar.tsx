@@ -43,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { route: 'advisories-and-approval', label: 'Advisories & Approval', icon: 'verified_user', badge: '2FA Req', badgeColor: 'bg-amber-500/20 text-amber-300' },
     { route: 'evidence-and-audit', label: 'Evidence and Audit', icon: 'fact_check', badge: 'WORM' },
     { route: 'system-health', label: 'System Health', icon: 'monitor_heart', badge: degradedModeActive ? 'Degraded' : 'Nominal' },
-    { route: 'mobile-field', label: 'Mobile Field View', icon: 'smartphone', badge: 'SOS Active' },
+    { route: 'mobile-field', label: 'Jan-Raksha (Citizen SOS)', icon: 'diversity_1', badge: 'Live PWA', badgeColor: 'bg-emerald-500/20 text-emerald-300' },
     { route: 'help-and-sops', label: 'Help & SOPs / FAQ', icon: 'menu_book' },
   ];
 

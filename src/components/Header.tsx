@@ -17,6 +17,7 @@ interface HeaderProps {
   onToggleMobileMenu?: () => void;
   onOpenWalkthrough?: () => void;
   onOpenPitchDesk?: () => void;
+  onOpenCitizenPortal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -32,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleMobileMenu,
   onOpenWalkthrough,
   onOpenPitchDesk,
+  onOpenCitizenPortal,
 }) => {
   const currentRegion =
     GLOBAL_CYCLONE_REGIONS.find((r) => r.id === selectedRegionId) || GLOBAL_CYCLONE_REGIONS[0];
@@ -167,6 +169,18 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Right: Actions, Theme Mode, Settings & Commander Profile */}
         <div className="flex items-center gap-1.5 sm:gap-2 text-xs">
           
+          {/* Jan-Raksha Citizen Lifeline Quick Button */}
+          {onOpenCitizenPortal && (
+            <button
+              onClick={onOpenCitizenPortal}
+              className="flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs font-mono transition-all cursor-pointer shadow-sm shadow-emerald-950/40"
+              title="Open Jan-Raksha Citizen & Community Lifeline"
+            >
+              <span className="material-symbols-outlined text-[15px]">diversity_1</span>
+              <span>Citizen SOS</span>
+            </button>
+          )}
+
           {/* 60s Tour Button */}
           {onOpenWalkthrough && (
             <button
