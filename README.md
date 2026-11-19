@@ -1,3 +1,8 @@
+> [!NOTE]
+> **OFFICIAL PORTFOLIO SHOWCASE BY SIVASUBRAMANIAN**  
+> **Original Author:** [Sivasubramanian](https://github.com/sivasubramanian86)  
+> *This repository is an open portfolio showcase. Unauthorized cloning, re-hosting, or submission to hackathons/competitions under another name is strictly prohibited.*
+
 # CycloNerveAI: National Cascade Intelligence & Anticipatory Action Platform
 
 [![CI Pipeline](https://github.com/sivasubramanian86/CycloNerveAI/actions/workflows/ci.yml/badge.svg)](https://github.com/sivasubramanian86/CycloNerveAI/actions)
